@@ -53,26 +53,11 @@ int main()
         temp_p[i].set_priority(p[i].get_priority());
         temp_p[i].set_atime(p[i].get_atime());
     }
-//*
- //* Used for checking input
- //* delete before sumbmission
-//    cout<<"P & TEMP_P\n\n\n";
-//    for(int i=1;i<6;i++){
-//        printf("%d %d %d %d\n",p[i].get_pid(),p[i].get_btime(),p[i].get_priority(),p[i].get_atime());
-//        printf("%d %d %d %d\n\n",temp_p[i].get_pid(),temp_p[i].get_btime(),temp_p[i].get_priority(),temp_p[i].get_atime());
-//
-//    }
-//
-//
-//
-//    cout<<"ending...."<<endl;
-//    return 0;
-//
-//*/
+
     int l,total_btime=0;
     for(l=1; l<6; l++)
         total_btime+=p[l].get_btime();
-    //sort(p,p+6,sortByProcessId);
+   
 
     //FCFS
     printf("**********FCFS**********\n\n");
@@ -89,10 +74,7 @@ int main()
 
 
         }
-//    used for checking the queue , delete before submission
-//        for(auto k:fcfs1)
-//            printf("%d ",k);
-//        printf("\n\n");
+
         temp = fcfs1.front();
 
         if(p[temp].get_rutime()==-1){
@@ -109,7 +91,8 @@ int main()
     }
     
     printf("\n\n");
-     int xx,yy,xx2;
+
+    int xx,yy,xx2;
       //Retrieving the original burst time
     for(i=1; i<=5; i++)
     {
@@ -133,7 +116,8 @@ int main()
         p[i].set_restime();
 
     }
-        //AVG WAITING TIME
+    
+    //AVG WAITING TIME
     int wt_sum=0,rest_sum=0;
     for(i=1; i<=5; i++)
     {
@@ -167,27 +151,17 @@ int main()
     }
     cout<<endl;
     cout<<endl;
-//return 0;
-// //retrieving the original values of processes
-//     for(int rec=1;rec<=5;rec++){
-//         p[rec].set_pid(temp_p[rec].get_pid());
-//         p[rec].set_btime(temp_p[rec].get_btime());
-//         p[rec].set_priority(temp_p[rec].get_priority());
-//         p[rec].set_atime(temp_p[rec].get_atime());
-//         p[rec].set_rutime(-1);
-//     }
 
 
 
    
 
-    // for(l=1; l<6; l++)
-    //     total_btime+=p[l].get_btime();
+
     sort(p,p+6,comparator);
 
     //PREEMPTIVE SJF
     t=0;
-    int cur_pid,prev_cur_pid=-1;//****
+    int cur_pid,prev_cur_pid=-1;
     cout<<"**********Preemptive SJF**********"<<endl<<endl;
     for(t=0; t<=total_btime; t++)
     {
@@ -379,7 +353,7 @@ int main()
 
     avg_wt=((wt_sum)*1.0)/5;
     avg_rest=((rest_sum)*1.0)/5;
-    cout<<endl; //****
+    cout<<endl; 
 
     cout<<"Avg Response Time    -   "<<avg_rest<<endl;
     cout<<"Avg Waiting Time     -   "<<avg_wt<<endl;
@@ -482,7 +456,7 @@ int main()
     {
         wt_sum+=p[i].get_wtime();
         rest_sum+=p[i].get_restime();
-        // cout<<wt_sum<<endl;
+        
     }
 
     avg_wt=((wt_sum)*1.0)/5;
@@ -753,10 +727,7 @@ int main()
         p[cur_pid].set_btime(cur_btime);
         quantum++;
 
-
-
-
-    }
+  }
 
 
 
@@ -822,16 +793,17 @@ int main()
 
     for(i=1; i<=5; i++)
         p[i].set_rutime(-1);
+
+
     //MLFQ Scheduling
     printf("**********MLFQ Scheduling**********\n\n");
     deque <int> q4,q8,q_fcfs;
+
     //Three queues
     //One with quantum = 4, another with quantum = 8
     //and lastly fcfs
     
-    // for testing 
-    //printf("%d",total_btime);
-    // return 0;
+
     prev_cur_pid=0;
     for(t=0;t<=total_btime;t++){
         for(i=1;i<=5;i++){
@@ -841,18 +813,11 @@ int main()
             }
                 
         }
-        //remove thiws
-        // printf("At time %d , Queue 4 : ",t);
-        // for(auto tempv_new:q4){
-        //     cout<<tempv_new <<" ";
 
-        // }
-
-        //printf("\n");
             
         if(!q4.empty()){
 
-//            if(!q4.empty()){
+
                 cur_pid = q4.front();
                 if(cur_pid!=prev_cur_pid){
                     printf("P%d     ",cur_pid);
@@ -868,7 +833,7 @@ int main()
                     q4.pop_front();
                 }
          
- //           }
+
              if(p[q4.front()].get_durationInCurrentQueue()==4){
                 p[q4.front()].set_durationInCurrentQueue(0);
                 q8.push_back(q4.front());
@@ -882,7 +847,7 @@ int main()
         else if(!q8.empty()){
 
 
- //           if(!q8.empty()){
+ 
                 cur_pid = q8.front();
                 if(cur_pid!=prev_cur_pid){
                     printf("P%d     ",cur_pid);
@@ -897,7 +862,7 @@ int main()
                     p[cur_pid].set_etime(t+1);
                     q8.pop_front();
                 }
- //           }
+
              if(p[q8.front()].get_durationInCurrentQueue()==8){
                 p[q8.front()].set_durationInCurrentQueue(0);
                 q_fcfs.push_back(q8.front());

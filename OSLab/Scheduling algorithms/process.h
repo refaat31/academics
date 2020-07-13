@@ -1,6 +1,3 @@
-//
-// Created by refaa on 7/12/2020.
-//
 
 #ifndef PROCESS_H
 #define PROCESS_H
