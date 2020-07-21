@@ -155,7 +155,8 @@ int main()
 
 
    
-
+   for(i=1; i<=5; i++)
+        p[i].set_rutime(-1);
 
     sort(p,p+6,comparator);
 
