@@ -57,7 +57,7 @@ int main()
     int l,total_btime=0;
     for(l=1; l<6; l++)
         total_btime+=p[l].get_btime();
-   
+
 
     //FCFS
     printf("**********FCFS**********\n\n");
@@ -79,7 +79,7 @@ int main()
 
         if(p[temp].get_rutime()==-1){
             p[temp].set_rutime(t);
-            
+
         }
 
         p[temp].set_btime(p[temp].get_btime()-1);
@@ -89,7 +89,7 @@ int main()
         }
 
     }
-    
+
     printf("\n\n");
 
     int xx,yy,xx2;
@@ -116,7 +116,7 @@ int main()
         p[i].set_restime();
 
     }
-    
+
     //AVG WAITING TIME
     int wt_sum=0,rest_sum=0;
     for(i=1; i<=5; i++)
@@ -154,7 +154,7 @@ int main()
 
 
 
-   
+
    for(i=1; i<=5; i++)
         p[i].set_rutime(-1);
 
@@ -354,7 +354,7 @@ int main()
 
     avg_wt=((wt_sum)*1.0)/5;
     avg_rest=((rest_sum)*1.0)/5;
-    cout<<endl; 
+    cout<<endl;
 
     cout<<"Avg Response Time    -   "<<avg_rest<<endl;
     cout<<"Avg Waiting Time     -   "<<avg_wt<<endl;
@@ -457,7 +457,7 @@ int main()
     {
         wt_sum+=p[i].get_wtime();
         rest_sum+=p[i].get_restime();
-        
+
     }
 
     avg_wt=((wt_sum)*1.0)/5;
@@ -803,7 +803,7 @@ int main()
     //Three queues
     //One with quantum = 4, another with quantum = 8
     //and lastly fcfs
-    
+
 
     prev_cur_pid=0;
     for(t=0;t<=total_btime;t++){
@@ -812,10 +812,10 @@ int main()
                 q4.push_back(i);
                 p[i].set_isTakenOnceMLFQ(true);
             }
-                
+
         }
 
-            
+
         if(!q4.empty()){
 
 
@@ -833,28 +833,28 @@ int main()
                     p[cur_pid].set_etime(t+1);
                     q4.pop_front();
                 }
-         
+
 
              if(p[q4.front()].get_durationInCurrentQueue()==4){
                 p[q4.front()].set_durationInCurrentQueue(0);
                 q8.push_back(q4.front());
                 q4.pop_front();
             }
-       
 
-                
-            
+
+
+
         }
         else if(!q8.empty()){
 
 
- 
+
                 cur_pid = q8.front();
                 if(cur_pid!=prev_cur_pid){
                     printf("P%d     ",cur_pid);
                     prev_cur_pid = q8.front();
                 }
-                
+
                 p[cur_pid].set_btime(p[cur_pid].get_btime()-1);
                 p[cur_pid].set_durationInCurrentQueue(p[cur_pid].get_durationInCurrentQueue()+1);
                 if(p[cur_pid].get_rutime()==-1)
@@ -955,6 +955,8 @@ bool comparator(process a, process b)
 
 bool comparator2(process a, process b)
 {
+    if(a.get_priority()==b.get_priority())
+        return (a.get_atime() < b.get_atime()) ;
     return (a.get_priority()<b.get_priority());
 }
 
